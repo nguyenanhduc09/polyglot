@@ -122,6 +122,32 @@ class TranslationManager:
 		new_name = languages.ALL_LANGUAGES.get(new_code, new_code)
 		return (True, new_name)
 
+	def cycle_engine(self, forward: bool) -> tuple[bool, str]:
+		"""
+		Cycles the active translation engine.
+
+		Args:
+			forward: True to cycle forward, False to cycle backward.
+
+		Returns:
+			A tuple containing a boolean for success and a user-facing message.
+		"""
+		all_engines = engine_manager.get_all_engines()
+		if not all_engines:
+			return (False, _("No translation engines available."))
+		conf = config.get_config()
+		current_id = conf["engine"]
+		engine_ids = [e.id for e in all_engines]
+		try:
+			current_index = engine_ids.index(current_id)
+		except ValueError:
+			current_index = 0
+		step = 1 if forward else -1
+		new_index = (current_index + step) % len(engine_ids)
+		new_engine = all_engines[new_index]
+		conf["engine"] = new_engine.id
+		return (True, new_engine.name)
+
 	def get_current_engine_and_language_info(self) -> str:
 		"""
 		Gets a formatted string of the current engine and languages for announcement,

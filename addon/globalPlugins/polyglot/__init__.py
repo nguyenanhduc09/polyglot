@@ -176,6 +176,22 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		self._cycle_language("target", forward=False)
 	script_cycleTargetLangBackward._stay_in_layer = True
 
+	def _cycle_engine(self, forward: bool) -> None:
+		success, message = self.manager.cycle_engine(forward)
+		ui.message(message)
+		if not success:
+			tones.beep(220, 120)
+
+	@script(description=_("Next translation engine"))
+	def script_cycleEngineForward(self, gesture: "inputCore.InputGesture") -> None:
+		self._cycle_engine(forward=True)
+	script_cycleEngineForward._stay_in_layer = True
+
+	@script(description=_("Previous translation engine"))
+	def script_cycleEngineBackward(self, gesture: "inputCore.InputGesture") -> None:
+		self._cycle_engine(forward=False)
+	script_cycleEngineBackward._stay_in_layer = True
+
 	@script(description=_("Announce current engine and languages"))
 	def script_announceEngineLanguagesInfo(self, gesture: "inputCore.InputGesture") -> None:
 		announcement = self.manager.get_current_engine_and_language_info()
@@ -271,6 +287,8 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		"kb:shift+s": "cycleSourceLangBackward",
 		"kb:g": "cycleTargetLangForward",
 		"kb:shift+g": "cycleTargetLangBackward",
+		"kb:e": "cycleEngineForward",
+		"kb:shift+e": "cycleEngineBackward",
 		"kb:a": "announceEngineLanguagesInfo",
 		"kb:c": "copyLastResult",
 		"kb:v": "toggleAutoTranslate",
