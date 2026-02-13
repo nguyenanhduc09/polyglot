@@ -5,6 +5,7 @@ from typing import Any
 import ui
 from speech.extensions import filter_speechSequence
 
+from ..common import cues
 from .manager import TranslationManager
 
 
@@ -13,24 +14,35 @@ class SpeechFilter:
 	manager: TranslationManager
 	last_spoken_text: str
 	_is_speaking_translation: bool
+	_suppress_capture: int
 
 	def __init__(self, manager: TranslationManager) -> None:
 		super().__init__()
 		self.manager = manager
 		self.last_spoken_text = ""
 		self._is_speaking_translation = False
+		self._suppress_capture = 0
 
 	def register(self) -> None:
 		filter_speechSequence.register(self.on_speech_sequence)
+		cues.register_speech_hook(self.suppress_next_capture)
 
 	def unregister(self) -> None:
 		_unused = filter_speechSequence.unregister(self.on_speech_sequence)
+		cues.unregister_speech_hook()
+
+	def suppress_next_capture(self) -> None:
+		self._suppress_capture += 1
 
 	def on_speech_sequence(self, sequence: list[Any]) -> list[Any]:
-		# Extract and save the text for the "Translate last spoken text" command.
+		# Extract the text from the speech sequence.
 		text_to_save = " ".join([s for s in sequence if isinstance(s, str) and s.strip()])
+		# Save the text unless suppression was requested by the cues module.
 		if text_to_save:
-			self.last_spoken_text = text_to_save
+			if self._suppress_capture > 0:
+				self._suppress_capture -= 1
+			else:
+				self.last_spoken_text = text_to_save
 		if not self.manager.auto_translate_enabled:
 			return sequence
 		# To prevent translation loops, skip if the speech is already a translation result.

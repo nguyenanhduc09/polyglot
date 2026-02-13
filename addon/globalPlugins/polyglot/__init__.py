@@ -9,7 +9,6 @@ import globalVars
 import gui
 import textInfos
 import tones
-import ui
 import wx
 from configobj import ConfigObj, Section
 from keyboardHandler import KeyboardInputGesture
@@ -18,6 +17,7 @@ from scriptHandler import script
 
 from .app.manager import TranslationManager
 from .app.speech_filter import SpeechFilter
+from .common import cues
 from .common.config import CONF_SECTION
 from .configspec import config_spec
 from .services import engine_manager
@@ -125,12 +125,12 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		try:
 			info = api.getCaretObject().makeTextInfo(textInfos.POSITION_SELECTION)
 			if not info or info.isCollapsed:
-				ui.message(_("Nothing selected"))
+				cues.speech.message(_("Nothing selected"))
 				return None
 			return info.text
 		except NotImplementedError:
 			log.warning("Failed to get selected text from the current object.", exc_info=True)
-			ui.message(_("Cannot get selected text from the current object"))
+			cues.speech.message(_("Cannot get selected text from the current object"))
 			return None
 
 	def _execute_translation(self, text: str, reverse: bool, show_status: bool) -> None:
@@ -140,7 +140,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		else:
 			new_from, new_to, error_message = self.manager.get_reverse_languages()
 			if error_message:
-				ui.message(error_message)
+				cues.speech.message(error_message)
 				return
 			self.manager.request_translation(
 				text,
@@ -152,7 +152,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 
 	def _cycle_language(self, target: str, forward: bool) -> None:
 		success, message = self.manager.cycle_language(target, forward)
-		ui.message(message)
+		cues.speech.message(message)
 		if not success:
 			tones.beep(220, 120)
 
@@ -178,7 +178,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 
 	def _cycle_engine(self, forward: bool) -> None:
 		success, message = self.manager.cycle_engine(forward)
-		ui.message(message)
+		cues.speech.message(message)
 		if not success:
 			tones.beep(220, 120)
 
@@ -195,7 +195,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 	@script(description=_("Swap source and target languages"))
 	def script_swapLanguages(self, gesture: "inputCore.InputGesture") -> None:
 		success, message = self.manager.swap_languages()
-		ui.message(message)
+		cues.speech.message(message)
 		if not success:
 			tones.beep(220, 120)
 	script_swapLanguages._stay_in_layer = True
@@ -203,7 +203,8 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 	@script(description=_("Announce current engine and languages"))
 	def script_announceEngineLanguagesInfo(self, gesture: "inputCore.InputGesture") -> None:
 		announcement = self.manager.get_current_engine_and_language_info()
-		ui.message(announcement)
+		cues.speech.message(announcement)
+	script_announceEngineLanguagesInfo._stay_in_layer = True
 
 	@script(description=_("Copy last translation to clipboard"))
 	def script_copyLastResult(self, gesture: "inputCore.InputGesture") -> None:
@@ -211,7 +212,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		if last_result:
 			_unused = api.copyToClip(last_result, notify=True)
 		else:
-			ui.message(_("No translation result to copy"))
+			cues.speech.message(_("No translation result to copy"))
 
 	@script(description=_("Open settings"))
 	def script_openSettings(self, gesture: "inputCore.InputGesture") -> None:
@@ -224,12 +225,12 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 	@script(description=_("Toggle auto-translation"))
 	def script_toggleAutoTranslate(self, gesture: "inputCore.InputGesture") -> None:
 		new_state = self.manager.toggle_auto_translate()
-		ui.message(_("Auto-translation enabled") if new_state else _("Auto-translation disabled"))
+		cues.speech.message(_("Auto-translation enabled") if new_state else _("Auto-translation disabled"))
 
 	@script(description=_("Clear cache"))
 	def script_clearCache(self, gesture: "inputCore.InputGesture") -> None:
 		self.manager.clear_cache()
-		ui.message(_("Cache cleared"))
+		cues.speech.message(_("Cache cleared"))
 
 	@script(description=_("Translate selection"))
 	def script_translateSelection(self, gesture: "inputCore.InputGesture") -> None:
@@ -244,34 +245,34 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 	@script(description=_("Translate clipboard"))
 	def script_translateClipboard(self, gesture: "inputCore.InputGesture") -> None:
 		if not (text := api.getClipData()):
-			ui.message(_("Clipboard is empty"))
+			cues.speech.message(_("Clipboard is empty"))
 			return
 		self._execute_translation(text, reverse=False, show_status=True)
 
 	@script(description=_("Translate clipboard (reversed direction)"))
 	def script_translateReverseClipboard(self, gesture: "inputCore.InputGesture") -> None:
 		if not (text := api.getClipData()):
-			ui.message(_("Clipboard is empty"))
+			cues.speech.message(_("Clipboard is empty"))
 			return
 		self._execute_translation(text, reverse=True, show_status=True)
 
 	@script(description=_("Translate last spoken text"))
 	def script_translateLastSpoken(self, gesture: "inputCore.InputGesture") -> None:
 		if not (text := self.speech_filter.last_spoken_text):
-			ui.message(_("No last spoken text"))
+			cues.speech.message(_("No last spoken text"))
 			return
 		self._execute_translation(text, reverse=False, show_status=True)
 
 	@script(description=_("Translate last spoken text (reversed direction)"))
 	def script_translateReverseLastSpoken(self, gesture: "inputCore.InputGesture") -> None:
 		if not (text := self.speech_filter.last_spoken_text):
-			ui.message(_("No last spoken text"))
+			cues.speech.message(_("No last spoken text"))
 			return
 		self._execute_translation(text, reverse=True, show_status=True)
 
 	@script(description=_("Show command layer help"))
 	def script_layerHelp(self, gesture: "inputCore.InputGesture") -> None:
-		ui.message(self._generate_layer_help_text())
+		cues.speech.message(self._generate_layer_help_text())
 
 	def _generate_layer_help_text(self) -> str:
 		help_items: list[str] = []

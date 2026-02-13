@@ -5,7 +5,6 @@ from typing import Any
 
 import api
 import queueHandler
-import ui
 from logHandler import log
 
 from ..common import config
@@ -239,7 +238,7 @@ class TranslationManager:
 	) -> None:
 		if not text or not text.strip():
 			if is_manual:
-				ui.message(_("Nothing to translate"))
+				cues.speech.message(_("Nothing to translate"))
 			return
 		conf = config.get_config()
 		engine_id = conf["engine"]
@@ -250,7 +249,7 @@ class TranslationManager:
 				f"Selected engine '{engine_id}' is not available or not fully implemented.", exc_info=True
 			)
 			if is_manual:
-				ui.message(
+				cues.speech.message(
 					_("Error: Selected engine '{engine}' is unavailable or not configured.").format(
 						engine=engine_id
 					)
@@ -269,7 +268,7 @@ class TranslationManager:
 				f"Engine '{engine_id}' is missing required default language implementations.", exc_info=True
 			)
 			if is_manual:
-				ui.message(_("Error: Engine '{engine}' is not configured.").format(engine=engine_id))
+				cues.speech.message(_("Error: Engine '{engine}' is not configured.").format(engine=engine_id))
 			return
 		if is_manual and show_status:
 			cues.sound.play(CueType.START)
@@ -327,7 +326,7 @@ class TranslationManager:
 					if isinstance(error, EngineError)
 					else f"{prefix}{_('An unknown error occurred')}"
 				)
-				ui.message(error_message)
+				cues.speech.message(error_message)
 				if not is_manual:
 					self.consecutive_failures += 1
 					if self.consecutive_failures >= 3:
@@ -336,7 +335,7 @@ class TranslationManager:
 						self.consecutive_failures = 0
 						queueHandler.queueFunction(
 							queueHandler.eventQueue,
-							ui.message,
+							cues.speech.message,
 							_("Auto-translation disabled due to repeated failures."),
 						)
 			else:
@@ -347,7 +346,7 @@ class TranslationManager:
 				if on_success:
 					on_success(translation)
 				else:
-					ui.message(translation)
+					cues.speech.message(translation)
 				if is_manual and allow_copy and config.get_config()["copyResult"]:
 					api.copyToClip(translation)
 

@@ -136,6 +136,30 @@ class speech:
 	"""A namespace for all speech-based cues."""
 
 	@staticmethod
-	def message(text: str) -> None:
-		"""Speaks text. MUST be called from the main NVDA thread."""
+	def message(text: str, suppress_capture: bool = True) -> None:
+		"""Speaks text. MUST be called from the main NVDA thread.
+
+		Args:
+			text: The text to speak.
+			suppress_capture: If True, notifies the speech filter to skip
+				capturing this message as `last_spoken_text`.
+		"""
+		if suppress_capture and _on_before_speech is not None:
+			_on_before_speech()
 		ui.message(text)
+
+
+# --- Speech Hook Registration ---
+_on_before_speech: Callable[[], None] | None = None
+
+
+def register_speech_hook(callback: Callable[[], None]) -> None:
+	"""Registers a callback to be invoked before the cues module speaks."""
+	global _on_before_speech
+	_on_before_speech = callback
+
+
+def unregister_speech_hook() -> None:
+	"""Unregisters the speech hook."""
+	global _on_before_speech
+	_on_before_speech = None
