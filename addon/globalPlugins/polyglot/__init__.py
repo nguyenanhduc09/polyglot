@@ -9,6 +9,7 @@ import globalVars
 import gui
 import textInfos
 import tones
+import ui
 import wx
 from configobj import ConfigObj, Section
 from keyboardHandler import KeyboardInputGesture
@@ -272,17 +273,54 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 
 	@script(description=_("Show command layer help"))
 	def script_layerHelp(self, gesture: "inputCore.InputGesture") -> None:
-		cues.speech.message(self._generate_layer_help_text())
+		ui.browseableMessage(
+			self._generate_layer_help_html(),
+			title=_("Polyglot Help"),
+			isHtml=True,
+			closeButton=True,
+			copyButton=True
+		)
 
-	def _generate_layer_help_text(self) -> str:
-		help_items: list[str] = []
+	def _generate_layer_help_html(self) -> str:
+		groups = [
+			(_("Translation Actions"), [
+				"translateSelection", "translateReverseSelection",
+				"translateClipboard", "translateReverseClipboard",
+				"translateLastSpoken", "translateReverseLastSpoken"
+			]),
+			(_("Configuration & Switching"), [
+				"cycleSourceLangForward", "cycleSourceLangBackward",
+				"cycleTargetLangForward", "cycleTargetLangBackward",
+				"cycleEngineForward", "cycleEngineBackward",
+				"swapLanguages", "announceEngineLanguagesInfo"
+			]),
+			(_("Tools & System"), [
+				"copyLastResult", "toggleAutoTranslate",
+				"clearCache", "openSettings", "layerHelp"
+			])
+		]
+
+		script_to_key = {}
 		for gesture, script_name in self.__layer_gestures.items():
 			_source, key_display_name = KeyboardInputGesture.getDisplayTextForIdentifier(gesture)
-			method = getattr(self, f"script_{script_name}")
-			description = method.__doc__ or script_name
-			help_items.append(f"{key_display_name}: {description}")
-		help_items.sort(key=lambda item: (item.startswith("h:"), item))
-		return "\n".join(help_items)
+			script_to_key[script_name] = key_display_name
+
+		html_parts = []
+		for title, scripts in groups:
+			html_parts.append(f"<h2>{title}</h2>")
+			html_parts.append("<table border='1' style='border-collapse: collapse; width: 100%;'>")
+			html_parts.append(f"<thead><tr><th style='text-align: left; padding: 5px;'>{_('Key')}</th><th style='text-align: left; padding: 5px;'>{_('Action')}</th></tr></thead>")
+			html_parts.append("<tbody>")
+			for script_name in scripts:
+				key_display = script_to_key.get(script_name, "")
+				if not key_display:
+					continue
+				method = getattr(self, f"script_{script_name}")
+				description = method.__doc__ or script_name
+				html_parts.append(f"<tr><td style='padding: 5px;'>{key_display}</td><td style='padding: 5px;'>{description}</td></tr>")
+			html_parts.append("</tbody></table>")
+
+		return "".join(html_parts)
 
 	__gestures = {"kb:NVDA+Shift+T": "layer_entry"}
 	__layer_gestures = {
