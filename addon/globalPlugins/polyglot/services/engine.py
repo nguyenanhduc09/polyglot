@@ -9,6 +9,7 @@ from logHandler import log
 
 from ..common.exceptions import EngineError, ResponseParsingError
 from ..common.network import send_request
+from ..common.text_utils import split_text
 
 addonHandler.initTranslation()
 
@@ -67,6 +68,14 @@ class BaseHttpEngine(TranslationEngine):
 	"""
 	Provides a common framework and rules for HTTP-based engines.
 	"""
+
+	@property
+	def max_request_length(self) -> int:
+		"""
+		Returns the maximum number of characters allowed per request.
+		Returns 0 or less if there is no limit.
+		"""
+		return 0
 
 	@property
 	@abstractmethod
@@ -228,6 +237,43 @@ class BaseHttpEngine(TranslationEngine):
 		pass
 
 	def translate(self, text: str, lang_from: str, lang_to: str, config: dict[str, Any]) -> dict[str, Any]:
+		limit = self.max_request_length
+		if limit <= 0 or len(text) <= limit:
+			return self._translate_chunk(text, lang_from, lang_to, config)
+		chunks = split_text(text, limit)
+		
+		translated_chunks = []
+		detected_lang = None
+		for chunk in chunks:
+			if not chunk.strip():
+				translated_chunks.append(chunk)
+				continue
+				
+			leading_ws = len(chunk) - len(chunk.lstrip())
+			trailing_ws = len(chunk) - len(chunk.rstrip())
+			
+			leading_str = chunk[:leading_ws] if leading_ws > 0 else ""
+			trailing_str = chunk[-trailing_ws:] if trailing_ws > 0 else ""
+			
+			stripped_chunk = chunk.strip()
+			if not stripped_chunk:
+				translated_chunks.append(chunk)
+				continue
+
+			res = self._translate_chunk(stripped_chunk, lang_from, lang_to, config)
+			translated_text = res.get("translation", "").strip()
+			
+			translated_chunks.append(leading_str + translated_text + trailing_str)
+			
+			if detected_lang is None and "lang_detected" in res:
+				detected_lang = res["lang_detected"]
+		
+		return {
+			"translation": "".join(translated_chunks),
+			"lang_detected": detected_lang
+		}
+
+	def _translate_chunk(self, text: str, lang_from: str, lang_to: str, config: dict[str, Any]) -> dict[str, Any]:
 		try:
 			params = self._build_request_params(text, lang_from, lang_to, config)
 			log.debug(f"Engine '{self.id}' built request params: {params.get('method')} {params.get('url')}")
