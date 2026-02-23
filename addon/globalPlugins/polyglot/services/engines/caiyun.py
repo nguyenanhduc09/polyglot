@@ -27,6 +27,10 @@ class CaiyunTranslateEngine(BaseHttpEngine):
 	name = _("Caiyun")
 
 	@property
+	def max_request_length(self) -> int:
+		return 5000
+
+	@property
 	def auto_detect_code(self) -> str | None:
 		return "auto"
 

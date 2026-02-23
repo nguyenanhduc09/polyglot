@@ -47,6 +47,10 @@ class OllamaBaseEngine(BaseHttpEngine):
 		return "en"
 
 	@property
+	def max_request_length(self) -> int:
+		return 512
+
+	@property
 	def reports_detected_language(self) -> bool:
 		return True
 

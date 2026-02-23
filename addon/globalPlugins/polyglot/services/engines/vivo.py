@@ -26,6 +26,15 @@ class VivoTranslateEngine(BaseHttpEngine):
 	}
 
 	@property
+	def max_request_length(self) -> int:
+		"""
+		Empirical testing (EN->ZH) revealed a limit of 5,001 characters.
+		It uses 'application/x-www-form-urlencoded'. To avoid payload bloat
+		and strict domestic gateway limits, a safe buffer of 3,000 is used.
+		"""
+		return 3000
+
+	@property
 	def auto_detect_code(self) -> str | None:
 		"""This engine does not support automatic language detection."""
 		return None

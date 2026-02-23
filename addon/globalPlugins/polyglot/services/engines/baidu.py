@@ -41,6 +41,10 @@ class BaiduTranslateEngine(BaseHttpEngine):
 	}
 
 	@property
+	def max_request_length(self) -> int:
+		return 6000
+
+	@property
 	def auto_detect_code(self) -> str | None:
 		return "auto"
 

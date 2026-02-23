@@ -56,6 +56,10 @@ class NiutransTranslateEngine(BaseHttpEngine):
 	}
 
 	@property
+	def max_request_length(self) -> int:
+		return 5000
+
+	@property
 	def auto_detect_code(self) -> str | None:
 		return "auto"
 
@@ -162,8 +166,8 @@ class NiutransTranslateEngine(BaseHttpEngine):
 			"data": urllib.parse.urlencode(final_payload).encode("utf-8"),
 		}
 
-	def translate(self, text: str, lang_from: str, lang_to: str, config: dict) -> dict:
-		"""Overrides the base translate method to pass the config to the response parser."""
+	def _translate_chunk(self, text: str, lang_from: str, lang_to: str, config: dict) -> dict:
+		"""Overrides the base _translate_chunk method to pass the config to the response parser."""
 		try:
 			params = self._build_request_params(text, lang_from, lang_to, config)
 			log.debug(f"Engine '{self.id}' built request params: {params.get('method')} {params.get('url')}")

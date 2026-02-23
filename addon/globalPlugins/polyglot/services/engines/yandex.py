@@ -29,6 +29,16 @@ class YandexTranslateEngine(BaseHttpEngine):
 	name = _("Yandex Translate")
 
 	@property
+	def max_request_length(self) -> int:
+		"""
+		Empirical testing (EN->ZH) revealed a limit of 10,240 characters.
+		Because this engine uses 'application/x-www-form-urlencoded', non-ASCII characters
+		(like Chinese) will inflate the payload size by up to 9x after URL encoding.
+		We strictly limit it to 5,000 to prevent gateway rejection.
+		"""
+		return 5000
+
+	@property
 	def auto_detect_code(self) -> str | None:
 		return ""
 

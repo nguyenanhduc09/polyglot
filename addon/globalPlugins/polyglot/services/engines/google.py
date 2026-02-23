@@ -20,6 +20,15 @@ class GoogleTranslateEngine(BaseHttpEngine):
 	MIRROR_URL = "https://translate.googleapis.mirror.nvdadr.com"
 
 	@property
+	def max_request_length(self) -> int:
+		"""
+		Empirical testing (EN->ZH) revealed a limit of 11,440 characters for the gtx endpoint.
+		Even with POST requests, we maintain this limit as a safe threshold to prevent
+		'413 Payload Too Large' errors from Google's gateway.
+		"""
+		return 11440
+
+	@property
 	def auto_detect_code(self) -> str | None:
 		return "auto"
 
@@ -152,11 +161,14 @@ class GoogleTranslateEngine(BaseHttpEngine):
 
 	def _build_request_params(self, text: str, lang_from: str, lang_to: str, config: dict) -> dict:
 		base_url = self.MIRROR_URL if config.get("use_mirror", False) else self.BASE_URL
-		url = (
-			f"{base_url}/translate_a/single?client=gtx&sl={lang_from}&tl={lang_to}&dt=t"
-			f"&q={urllib.parse.quote(text)}"
-		)
-		return {"method": "GET", "url": url}
+		url = f"{base_url}/translate_a/single?client=gtx&sl={lang_from}&tl={lang_to}&dt=t"
+		data = urllib.parse.urlencode({"q": text}).encode("utf-8")
+		return {
+			"method": "POST",
+			"url": url,
+			"headers": {"Content-Type": "application/x-www-form-urlencoded"},
+			"data": data,
+		}
 
 	def _parse_response(self, response_body: str) -> dict:
 		data = json.loads(response_body)

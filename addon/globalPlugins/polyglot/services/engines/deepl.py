@@ -25,6 +25,10 @@ class DeepLEngine(BaseHttpEngine):
 	FORMALITY_SUPPORTED_LANGUAGES = {"DE", "IT", "ES", "PL", "RU", "FR", "PT-PT", "NL", "JA", "PT-BR"}
 
 	@property
+	def max_request_length(self) -> int:
+		return 10000
+
+	@property
 	def auto_detect_code(self) -> str | None:
 		return "auto"
 

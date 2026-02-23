@@ -47,6 +47,14 @@ class OpenRouterTranslateEngine(BaseHttpEngine):
 	}
 
 	@property
+	def max_request_length(self) -> int:
+		"""
+		Set to 4000 to maintain a safe token window and prevent timeout issues
+		with large documents across various LLM providers.
+		"""
+		return 4000
+
+	@property
 	def auto_detect_code(self) -> str | None:
 		return "auto"
 

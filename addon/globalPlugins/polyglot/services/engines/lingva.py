@@ -28,6 +28,16 @@ class LingvaTranslateEngine(BaseHttpEngine):
 	name = _("Lingva Translate")
 
 	@property
+	def max_request_length(self) -> int:
+		"""
+		Empirical testing (EN->ZH) revealed a limit of 4,998 characters.
+		CRITICAL: Lingva uses GET requests with the text embedded in the URL path.
+		URL-encoded Chinese characters will massively inflate the URI length.
+		A very strict limit of 1,000 is enforced here to avoid '414 URI Too Long' crashes.
+		"""
+		return 1000
+
+	@property
 	def auto_detect_code(self) -> str | None:
 		return "auto"
 

@@ -45,8 +45,13 @@ class MicrosoftTranslateEngine(BaseHttpEngine):
 
 	@property
 	def max_request_length(self) -> int:
-		"""The Microsoft Edge translation API has a character limit per request."""
-		return 50000
+		"""
+		The Microsoft Edge translation API has a character limit per request.
+		Empirical testing (EN->ZH) revealed a hard limit of 50,000 characters.
+		We set a safe buffer of 30,000 to prevent payload size bloat (when translating
+		from multi-byte languages like Chinese) and to avoid network timeout issues.
+		"""
+		return 30000
 
 	@property
 	def default_target_language(self) -> str:
