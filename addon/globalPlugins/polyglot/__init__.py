@@ -24,6 +24,7 @@ from .configspec import config_spec
 from .services import engine_manager
 from .views import factory as ui_factory
 from .views import settings
+from .views.interactive_dialog import InteractiveTranslationDialog
 
 addonHandler.initTranslation()
 
@@ -215,6 +216,19 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		else:
 			cues.speech.message(_("No translation result to copy"))
 
+	@script(description=_("Open interactive translation dialog"))
+	def script_openInteractiveDialog(self, gesture: "inputCore.InputGesture") -> None:
+		def showDialog():
+			gui.mainFrame.prePopup()
+			try:
+				dialog = InteractiveTranslationDialog(gui.mainFrame, self.manager)
+				dialog.ShowModal()
+				dialog.Destroy()
+			finally:
+				gui.mainFrame.postPopup()
+
+		wx.CallAfter(showDialog)
+
 	@script(description=_("Open settings"))
 	def script_openSettings(self, gesture: "inputCore.InputGesture") -> None:
 		wx.CallAfter(
@@ -295,6 +309,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 				"swapLanguages", "announceEngineLanguagesInfo"
 			]),
 			(_("Tools & System"), [
+				"openInteractiveDialog",
 				"copyLastResult", "toggleAutoTranslate",
 				"clearCache", "openSettings", "layerHelp"
 			])
@@ -340,6 +355,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		"kb:a": "announceEngineLanguagesInfo",
 		"kb:c": "copyLastResult",
 		"kb:v": "toggleAutoTranslate",
+		"kb:i": "openInteractiveDialog",
 		"kb:o": "openSettings",
 		"kb:x": "clearCache",
 		"kb:h": "layerHelp",
