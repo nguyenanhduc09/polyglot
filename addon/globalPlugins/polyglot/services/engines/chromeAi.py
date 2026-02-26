@@ -239,7 +239,17 @@ class ChromeAiEngine(ChunkedTranslationMixin):
 						console.log('[DOWNLOAD_END]');
 					}}
 				}}
-				const result = await globalThis._aiTranslators[key].translate(inputText);
+				// Chrome AI models discard newlines; translate line-by-line to preserve structure.
+				const lines = inputText.split('\\n');
+				const translatedLines = [];
+				for (const line of lines) {{
+					if (line.trim() === '') {{
+						translatedLines.push(line);
+					}} else {{
+						translatedLines.push(await globalThis._aiTranslators[key].translate(line));
+					}}
+				}}
+				const result = translatedLines.join('\\n');
 				return JSON.stringify({{code: 'SUCCESS', data: result, detectedLang: detectedLang}});
 			}} catch (err) {{
 				delete globalThis._aiTranslators[key];
