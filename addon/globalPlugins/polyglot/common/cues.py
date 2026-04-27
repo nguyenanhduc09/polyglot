@@ -168,6 +168,22 @@ class Beep:
 				)
 
 	@classmethod
+	def reportProgressBeepOnly(cls, current: int, total: int) -> None:
+		"""Reports progress with beeps only, respecting NVDA's beep progress settings."""
+		if total <= 1:
+			return
+		current = max(0, min(current, total))
+		pct = int(current / total * 100)
+		pbConf = config.conf["presentation"]["progressBarUpdates"]
+		mode = pbConf["progressBarOutputMode"]
+		if mode not in ("beep", "both"):
+			return
+		if abs(pct - cls._lastBeepPct) >= pbConf["beepPercentageInterval"]:
+			freq = int(pbConf["beepMinHZ"] * 2 ** (pct / 25.0))
+			tones.beep(freq, 40)
+			cls._lastBeepPct = pct
+
+	@classmethod
 	def resetProgress(cls) -> None:
 		"""Resets progress tracking. Call before starting a new tracked task."""
 		cls._lastBeepPct = -100

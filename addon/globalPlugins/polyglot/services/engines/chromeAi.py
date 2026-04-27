@@ -210,7 +210,7 @@ class ChromeAiEngine(ChunkedTranslationMixin):
 			if "[DOWNLOAD_PROGRESS]" in logText:
 				try:
 					pct = int(logText.replace("[DOWNLOAD_PROGRESS]", ""))
-					cues.Beep.reportProgress(pct, 100)
+					cues.Beep.reportProgressBeepOnly(pct, 100)
 				except ValueError:
 					pass
 			elif "[DOWNLOAD_START]" in logText:
