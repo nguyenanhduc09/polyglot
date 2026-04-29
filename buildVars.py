@@ -2,7 +2,8 @@
 # Change this file instead of sconstruct or manifest files, whenever possible.
 
 import os
-from site_scons.site_tools.NVDATool.typings import AddonInfo, BrailleTables, SymbolDictionaries
+
+from site_scons.site_tools.NVDATool.typings import AddonInfo, BrailleTables, SymbolDictionaries, SpeechDictionaries
 
 # Since some strings in `addon_info` are translatable,
 # we need to include them in the .po files.
@@ -61,10 +62,9 @@ addon_info = AddonInfo(
 pythonSources = [
 	os.path.join(dirpath, filename)
 	for dirpath, dirnames, filenames in os.walk("addon")
-		for filename in filenames
-		if os.path.splitext(filename)[1] == ".py"
+	for filename in filenames
+	if os.path.splitext(filename)[1] == ".py"
 ]
-
 
 # Files that contain strings for translation. Usually your python sources
 i18nSources: list[str] = pythonSources + ["buildVars.py"]
@@ -86,7 +86,7 @@ baseLanguage: str = "en"
 # If you need to add support for markup such as tables, fill out the below list.
 # Extensions string must be of the form "markdown.extensions.extensionName"
 # e.g. "markdown.extensions.tables" to add tables.
-markdownExtensions: list[str] = ['markdown.extensions.extra', 'markdown.extensions.smarty']
+markdownExtensions: list[str] = ["markdown.extensions.extra", "markdown.extensions.smarty"]
 
 # Custom braille translation tables
 # If your add-on includes custom braille tables (most will not), fill out this dictionary.
@@ -104,5 +104,14 @@ brailleTables: BrailleTables = {}
 # Each key is the name of the dictionary,
 # with keys inside recording the following attributes:
 # displayName (name of the speech dictionary shown to users and translatable),
-# mandatory (True when always enabled, False when not.
+# mandatory (True when always enabled, False when not).
 symbolDictionaries: SymbolDictionaries = {}
+
+# Custom speech dictionaries (distinct from symbol dictionaries above)
+# Speech dictionary files reside in the speechDicts folder and are named `name.dic`.
+# If your add-on includes custom speech (pronunciation) dictionaries (most will not), fill out this dictionary.
+# Each key is the name of the dictionary,
+# with keys inside recording the following attributes:
+# displayName (name of the speech dictionary shown to users and translatable),
+# mandatory (True when always enabled, False when not).
+speechDictionaries: SpeechDictionaries = {}
