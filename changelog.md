@@ -1,4 +1,4 @@
-### 0.8.4
+### 0.8.6
 
-- Adjust settings panel focus order.
-- Support enabling and disabling engines individually.
+- Trim bundled websocket client files.
+- ChromeAI stability improvements.
