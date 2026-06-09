@@ -31,6 +31,7 @@ from .common.config import CONF_SECTION
 from .configspec import configSpec
 from .services import engineManager
 from .services.cdpBridge import CdpBridge
+from .modelManager import menu as modelManagerMenu
 from .views import factory as uiFactory
 from .views import settings
 from .views.interactiveDialog import InteractiveTranslationDialog
@@ -83,19 +84,27 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		self.speechFilter = SpeechFilter(self.manager)
 		self.speechFilter.register()
 		self.isLayerActive = False
+		self.modelManagerMenuItem: wx.MenuItem | None = None
 		if not globalVars.appArgs.secure:
 			gui.settingsDialogs.NVDASettingsDialog.categoryClasses.append(settings.TranslationSettingsPanel)
+			self.modelManagerMenuItem = modelManagerMenu.bindToolsMenu(self)
 
 	def terminate(self):
 		self.manager.terminateAllTasks()
 		self.speechFilter.unregister()
 		CdpBridge.getInstance().terminate()
+		modelManagerMenu.closeModelManagerDialog()
 		if not globalVars.appArgs.secure:
 			if settings.TranslationSettingsPanel in gui.settingsDialogs.NVDASettingsDialog.categoryClasses:
 				gui.settingsDialogs.NVDASettingsDialog.categoryClasses.remove(
 					settings.TranslationSettingsPanel,
 				)
+			modelManagerMenu.unbindToolsMenu(self.modelManagerMenuItem)
 		super().terminate()
+
+	def onOpenModelManager(self, event: wx.CommandEvent) -> None:
+		"""Open the native ChromeAI model manager from NVDA's Tools menu."""
+		modelManagerMenu.openModelManagerDialog()
 
 	def getScript(self, gesture: "inputCore.InputGesture") -> None:
 		if not self.isLayerActive:

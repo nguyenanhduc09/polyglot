@@ -1,0 +1,93 @@
+# -*- coding: utf-8 -*-
+# A part of the Polyglot add-on for NVDA.
+# Copyright (C) 2025 Cary-rowen <manchen_0528@outlook.com>
+# This file is covered by the GNU General Public License.
+# See the file COPYING.txt for more details.
+
+"""Tools menu integration for the native model manager dialog."""
+
+from __future__ import annotations
+
+from typing import Protocol
+
+import addonHandler
+import gui
+import wx
+
+from .dialog import ModelManagerDialog
+
+addonHandler.initTranslation()
+
+
+class _MenuHandler(Protocol):
+	"""Protocol for objects that handle model manager menu commands."""
+
+	def onOpenModelManager(self, event: wx.CommandEvent) -> None:
+		"""Handle the Tools menu command."""
+
+
+_dialog: ModelManagerDialog | None = None
+
+
+def openModelManagerDialog() -> None:
+	"""Open the model manager dialog or focus the existing instance."""
+	global _dialog
+	if _dialog is not None:
+		try:
+			if _dialog.IsShown():
+				_dialog.Raise()
+				_dialog.SetFocus()
+				return
+		except RuntimeError:
+			_dialog = None
+	gui.mainFrame.prePopup()
+	try:
+		_dialog = ModelManagerDialog(gui.mainFrame)
+		_dialog.Show()
+	finally:
+		gui.mainFrame.postPopup()
+
+
+def clearDialogReference(dialog: ModelManagerDialog) -> None:
+	"""Clear the stored dialog reference when a dialog is destroyed."""
+	global _dialog
+	if _dialog is dialog:
+		_dialog = None
+
+
+def closeModelManagerDialog() -> None:
+	"""Close the model manager dialog during add-on shutdown."""
+	global _dialog
+	if _dialog is None:
+		return
+	try:
+		_dialog.Destroy()
+	except RuntimeError:
+		pass
+	finally:
+		_dialog = None
+
+
+def bindToolsMenu(handler: _MenuHandler) -> wx.MenuItem:
+	"""Create the Tools menu item for opening the model manager."""
+	item = gui.mainFrame.sysTrayIcon.toolsMenu.Append(
+		wx.ID_ANY,
+		_("Polyglot ChromeAI model manager"),
+		_("Manage Polyglot ChromeAI offline translation models"),
+	)
+	gui.mainFrame.sysTrayIcon.Bind(wx.EVT_MENU, handler.onOpenModelManager, item)
+	return item
+
+
+def unbindToolsMenu(item: wx.MenuItem | None) -> None:
+	"""Remove the Tools menu item if it was added."""
+	if item is None:
+		return
+	try:
+		gui.mainFrame.sysTrayIcon.Unbind(wx.EVT_MENU, source=item)
+	except RuntimeError:
+		pass
+	try:
+		gui.mainFrame.sysTrayIcon.toolsMenu.Remove(item.Id)
+	except RuntimeError:
+		pass
