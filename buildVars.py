@@ -23,7 +23,7 @@ addon_info = AddonInfo(
 	addon_summary=_("Polyglot"),
 	# Add-on description
 	# Translators: Long description to be shown for this add-on on add-on information from add-on store
-	addon_description=_("""This is A translation add-on. Supports multiple engines."""),
+	addon_description=_("""A translation add-on for NVDA with support for multiple engines."""),
 	# version
 	addon_version="0.8.7",
 	# Brief changelog for this version

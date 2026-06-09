@@ -118,19 +118,17 @@ Polyglot can use Chrome's built-in Translator API for offline translation. Trans
 
 - Google Chrome must be installed.
 - Chrome 138 or later is recommended.
-- The first use of a language direction requires an internet connection to download the local translation model.
+- The first use of a language direction requires the local translation model to be prepared. Polyglot can download the model through its model manager, or you can let Chrome download it.
 
 ### How To Use
 
 Select `Chrome AI (Offline)` in Polyglot settings, then choose the source and target languages.
 
-On first use, Chrome downloads the required model if it is not already available. Polyglot reports download progress according to NVDA's progress reporting settings. Once the download completes, translation continues automatically.
+On first use, if the required model is not installed, Polyglot asks how to proceed. Choose Yes to download and install the model with Polyglot's model manager; use this if Chrome's model download service is slow, blocked, or unreliable on your network. Choose No to let Chrome download the model. Choose Cancel to cancel the current translation. After the model is ready, translation continues automatically.
 
 ### Network And Models
 
-Translation runs locally, but model downloads are managed by Chrome and still need access to Chrome's download service. In some network environments, downloads may be slow or fail.
-
-If a download fails, configure a system proxy, try again later, or switch to another translation engine. Polyglot does not provide model download URLs and does not manage model files manually.
+Translation runs locally. Models can be installed by Polyglot's model manager or downloaded by Chrome. If Chrome's model download service is slow or unavailable on your network, choose Yes in the prompt, or open the Polyglot ChromeAI model manager from NVDA's Tools menu to install or remove offline models in advance.
 
 ### Privacy And Data
 
@@ -149,7 +147,7 @@ When NVDA exits, Polyglot closes the Chrome instance it started.
 ### Limitations
 
 - Supported languages and language pairs are determined by Chrome's Translator API.
-- First use requires a model download, which may be affected by network conditions.
+- First use requires the model to be prepared; model downloads may be affected by network conditions.
 - If the Translator API is unavailable, update Chrome or make sure the related Chrome feature is enabled.
 
 ## Engine Overview
@@ -160,7 +158,7 @@ The repository currently includes the following engines:
 | --- | --- | --- |
 | `Baidu Translate` | Baidu app ID and secret | Standard vendor API integration. |
 | `Caiyun` | Caiyun token | Standard vendor API integration. |
-| `Chrome AI (Offline)` | None | Uses Chrome's built-in Translator API with local models; model download is required on first use. |
+| `Chrome AI (Offline)` | None | Uses Chrome's built-in Translator API with local models; the model must be prepared on first use. |
 | `DeepL` | DeepL API key | Standard vendor API integration. |
 | `Google Translate (key-free)` | None | Supports an optional mirror endpoint toggle. |
 | `Google Translate (Polyglot)` | Configurable API key and endpoint | Ships with default endpoint values in code; availability depends on service status. |

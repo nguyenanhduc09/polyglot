@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 'polyglot' '0.1.0'\n"
 "Report-Msgid-Bugs-To: 'nvda-translations@groups.io'\n"
-"POT-Creation-Date: 2026-05-11 12:33+0800\n"
-"PO-Revision-Date: 2026-05-11 12:10+0800\n"
+"POT-Creation-Date: 2026-06-09 08:27+0800\n"
+"PO-Revision-Date: 2026-06-09 08:00+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -20,150 +20,151 @@ msgstr ""
 #. Add-on summary/title, usually the user visible name of the add-on
 #. Translators: Summary/title for this add-on
 #. to be shown on installation and add-on information found in add-on store
-#: addon\globalPlugins\polyglot\__init__.py:74
+#: addon\globalPlugins\polyglot\__init__.py:75
 #: addon\globalPlugins\polyglot\views\settings.py:21 buildVars.py:23
 msgid "Polyglot"
 msgstr "Polyglot"
 
-#: addon\globalPlugins\polyglot\__init__.py:126
+#: addon\globalPlugins\polyglot\__init__.py:135
 msgid "Enter translation command layer"
 msgstr "进入翻译命令层"
 
-#: addon\globalPlugins\polyglot\__init__.py:141
+#: addon\globalPlugins\polyglot\__init__.py:150
 msgid "Nothing selected"
 msgstr "未选择任何内容"
 
-#: addon\globalPlugins\polyglot\__init__.py:146
+#: addon\globalPlugins\polyglot\__init__.py:155
 msgid "Cannot get selected text from the current object"
 msgstr "无法从当前对象获取选中文本"
 
-#: addon\globalPlugins\polyglot\__init__.py:172
+#: addon\globalPlugins\polyglot\__init__.py:181
 msgid "Next source language"
 msgstr "下一个源语言"
 
-#: addon\globalPlugins\polyglot\__init__.py:178
+#: addon\globalPlugins\polyglot\__init__.py:187
 msgid "Previous source language"
 msgstr "上一个源语言"
 
-#: addon\globalPlugins\polyglot\__init__.py:184
+#: addon\globalPlugins\polyglot\__init__.py:193
 msgid "Next target language"
 msgstr "下一个目标语言"
 
-#: addon\globalPlugins\polyglot\__init__.py:190
+#: addon\globalPlugins\polyglot\__init__.py:199
 msgid "Previous target language"
 msgstr "上一个目标语言"
 
-#: addon\globalPlugins\polyglot\__init__.py:202
+#: addon\globalPlugins\polyglot\__init__.py:211
 msgid "Next translation engine"
 msgstr "下一个翻译引擎"
 
-#: addon\globalPlugins\polyglot\__init__.py:208
+#: addon\globalPlugins\polyglot\__init__.py:217
 msgid "Previous translation engine"
 msgstr "上一个翻译引擎"
 
-#: addon\globalPlugins\polyglot\__init__.py:214
+#: addon\globalPlugins\polyglot\__init__.py:223
 msgid "Swap source and target languages"
 msgstr "交换源语言和目标语言"
 
-#: addon\globalPlugins\polyglot\__init__.py:223
+#: addon\globalPlugins\polyglot\__init__.py:232
 msgid "Announce current engine and languages"
 msgstr "播报当前引擎和翻译语言方向"
 
-#: addon\globalPlugins\polyglot\__init__.py:230
+#: addon\globalPlugins\polyglot\__init__.py:239
 msgid "Copy last translation to clipboard"
 msgstr "复制上次翻译结果到剪贴板"
 
-#: addon\globalPlugins\polyglot\__init__.py:236
+#: addon\globalPlugins\polyglot\__init__.py:245
 msgid "No translation result to copy"
 msgstr "没有可复制的翻译结果"
 
-#: addon\globalPlugins\polyglot\__init__.py:238
+#: addon\globalPlugins\polyglot\__init__.py:247
 msgid "Open interactive translation dialog"
 msgstr "打开交互式翻译对话框"
 
-#: addon\globalPlugins\polyglot\__init__.py:251
+#: addon\globalPlugins\polyglot\__init__.py:260
 msgid "Open settings"
 msgstr "打开设置"
 
-#: addon\globalPlugins\polyglot\__init__.py:259
+#: addon\globalPlugins\polyglot\__init__.py:268
 msgid "Toggle auto-translation"
 msgstr "切换自动翻译"
 
-#: addon\globalPlugins\polyglot\__init__.py:262
+#: addon\globalPlugins\polyglot\__init__.py:271
 msgid "Auto-translation enabled"
 msgstr "自动翻译已开启"
 
-#: addon\globalPlugins\polyglot\__init__.py:262
+#: addon\globalPlugins\polyglot\__init__.py:271
 msgid "Auto-translation disabled"
 msgstr "自动翻译已关闭"
 
-#: addon\globalPlugins\polyglot\__init__.py:264
+#: addon\globalPlugins\polyglot\__init__.py:273
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:212
 msgid "Clear cache"
 msgstr "清除缓存"
 
-#: addon\globalPlugins\polyglot\__init__.py:267
+#: addon\globalPlugins\polyglot\__init__.py:276
 msgid "Cache cleared"
 msgstr "缓存已清除"
 
-#: addon\globalPlugins\polyglot\__init__.py:269
+#: addon\globalPlugins\polyglot\__init__.py:278
 msgid "Translate selection"
 msgstr "翻译选中内容"
 
-#: addon\globalPlugins\polyglot\__init__.py:274
+#: addon\globalPlugins\polyglot\__init__.py:283
 msgid "Translate selection (reversed direction)"
 msgstr "反向翻译选中内容"
 
-#: addon\globalPlugins\polyglot\__init__.py:279
+#: addon\globalPlugins\polyglot\__init__.py:288
 msgid "Translate clipboard"
 msgstr "翻译剪贴板"
 
-#: addon\globalPlugins\polyglot\__init__.py:282
-#: addon\globalPlugins\polyglot\__init__.py:289
+#: addon\globalPlugins\polyglot\__init__.py:291
+#: addon\globalPlugins\polyglot\__init__.py:298
 msgid "Clipboard is empty"
 msgstr "剪贴板为空"
 
-#: addon\globalPlugins\polyglot\__init__.py:286
+#: addon\globalPlugins\polyglot\__init__.py:295
 msgid "Translate clipboard (reversed direction)"
 msgstr "反向翻译剪贴板"
 
-#: addon\globalPlugins\polyglot\__init__.py:293
+#: addon\globalPlugins\polyglot\__init__.py:302
 msgid "Translate last spoken text"
 msgstr "翻译最后朗读的内容"
 
-#: addon\globalPlugins\polyglot\__init__.py:296
-#: addon\globalPlugins\polyglot\__init__.py:303
+#: addon\globalPlugins\polyglot\__init__.py:305
+#: addon\globalPlugins\polyglot\__init__.py:312
 msgid "No last spoken text"
 msgstr "没有最后朗读的内容"
 
-#: addon\globalPlugins\polyglot\__init__.py:300
+#: addon\globalPlugins\polyglot\__init__.py:309
 msgid "Translate last spoken text (reversed direction)"
 msgstr "反向翻译最后朗读的内容"
 
-#: addon\globalPlugins\polyglot\__init__.py:307
+#: addon\globalPlugins\polyglot\__init__.py:316
 msgid "Show command layer help"
 msgstr "显示命令层帮助"
 
-#: addon\globalPlugins\polyglot\__init__.py:311
+#: addon\globalPlugins\polyglot\__init__.py:320
 msgid "Polyglot Help"
 msgstr "Polyglot 帮助"
 
-#: addon\globalPlugins\polyglot\__init__.py:320
+#: addon\globalPlugins\polyglot\__init__.py:329
 msgid "Translation Actions"
 msgstr "翻译操作"
 
-#: addon\globalPlugins\polyglot\__init__.py:331
+#: addon\globalPlugins\polyglot\__init__.py:340
 msgid "Configuration & Switching"
 msgstr "配置和切换"
 
-#: addon\globalPlugins\polyglot\__init__.py:344
+#: addon\globalPlugins\polyglot\__init__.py:353
 msgid "Tools & System"
 msgstr "工具和系统"
 
-#: addon\globalPlugins\polyglot\__init__.py:366
+#: addon\globalPlugins\polyglot\__init__.py:375
 msgid "Key"
 msgstr "按键"
 
-#: addon\globalPlugins\polyglot\__init__.py:366
+#: addon\globalPlugins\polyglot\__init__.py:375
 msgid "Action"
 msgstr "操作"
 
@@ -191,7 +192,7 @@ msgid "No translation engines available."
 msgstr "无可用翻译引擎。"
 
 #: addon\globalPlugins\polyglot\app\manager.py:153
-#: addon\globalPlugins\polyglot\app\manager.py:275
+#: addon\globalPlugins\polyglot\app\manager.py:277
 #: addon\globalPlugins\polyglot\views\interactiveDialog.py:44
 #: addon\globalPlugins\polyglot\views\interactiveDialog.py:237
 #: addon\globalPlugins\polyglot\views\interactiveDialog.py:271
@@ -230,20 +231,20 @@ msgid "Error: Selected engine '{engine}' is unavailable or not configured."
 msgstr "错误：所选引擎“{engine}”不可用或未配置。"
 
 #. Translators: Error message when the selected translation engine is not configured properly. {engine} is the internal ID of the engine.
-#: addon\globalPlugins\polyglot\app\manager.py:305
+#: addon\globalPlugins\polyglot\app\manager.py:307
 #, python-brace-format
 msgid "Error: Engine '{engine}' is not configured."
 msgstr "错误：引擎“{engine}”未配置。"
 
-#: addon\globalPlugins\polyglot\app\manager.py:367
+#: addon\globalPlugins\polyglot\app\manager.py:371
 msgid "Translation failed: "
 msgstr "翻译失败："
 
-#: addon\globalPlugins\polyglot\app\manager.py:371
+#: addon\globalPlugins\polyglot\app\manager.py:375
 msgid "An unknown error occurred"
 msgstr "发生未知错误"
 
-#: addon\globalPlugins\polyglot\app\manager.py:385
+#: addon\globalPlugins\polyglot\app\manager.py:389
 msgid "Auto-translation disabled due to repeated failures."
 msgstr "自动翻译因连续失败已被禁用。"
 
@@ -775,18 +776,383 @@ msgstr "本月翻译配额已用尽。"
 msgid "Service returned an error: {code} {reason}. Details: {details}"
 msgstr "服务返回错误：{code} {reason}。详情：{details}"
 
+#: addon\globalPlugins\polyglot\modelManager\catalog.py:154
+msgid "Bundled model catalog is missing."
+msgstr "内置模型清单缺失。"
+
+#: addon\globalPlugins\polyglot\modelManager\catalog.py:161
+msgid "Catalog JSON is empty."
+msgstr "模型清单 JSON 为空。"
+
+#: addon\globalPlugins\polyglot\modelManager\catalog.py:164
+msgid "Catalog JSON is invalid."
+msgstr "模型清单 JSON 无效。"
+
+#: addon\globalPlugins\polyglot\modelManager\catalog.py:170
+#, python-brace-format
+msgid "Unsupported catalog schema version: {version}"
+msgstr "不支持的模型清单格式版本：{version}"
+
+#: addon\globalPlugins\polyglot\modelManager\catalog.py:181
+#, python-brace-format
+msgid "Duplicate model package key in catalog: {key}"
+msgstr "模型清单中存在重复的模型包标识：{key}"
+
+#: addon\globalPlugins\polyglot\modelManager\catalog.py:240
+msgid "Catalog URL must be an HTTP or HTTPS URL."
+msgstr "清单地址必须是 HTTP 或 HTTPS URL。"
+
+#: addon\globalPlugins\polyglot\modelManager\catalog.py:286
+#, python-brace-format
+msgid "{source} / {target}"
+msgstr "{source} / {target}"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:91
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:266
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:293
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:382
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:486
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:594
+#: addon\globalPlugins\polyglot\modelManager\service.py:221
+#: addon\globalPlugins\polyglot\modelManager\service.py:246
+#: addon\globalPlugins\polyglot\modelManager\service.py:276
+msgid "Polyglot ChromeAI Model Manager"
+msgstr "Polyglot ChromeAI 模型管理器"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:127
+msgid ""
+"Models: check a model to install it; uncheck an installed model to remove it."
+msgstr "模型：勾选模型以安装；取消勾选已安装的模型以移除。"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:139
+msgid "Language"
+msgstr "语言"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:140
+msgid "Status"
+msgstr "状态"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:141
+msgid "Size"
+msgstr "大小"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:142
+msgid "Version"
+msgstr "版本"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:154
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:553
+#, python-brace-format
+msgid "Apply changes ({count})"
+msgstr "应用更改（{count}）"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:155
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:560
+msgid "Advanced"
+msgstr "高级"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:167
+msgid "Log"
+msgstr "日志"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:187
+msgid "Catalog URL:"
+msgstr "清单地址："
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:192
+msgid "Restore default"
+msgstr "恢复默认"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:200
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:344
+msgid "Catalog: not loaded"
+msgstr "清单：未加载"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:203
+#, python-brace-format
+msgid "Install target: {path}"
+msgstr "安装位置：{path}"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:205
+msgid "Status: idle"
+msgstr "状态：就绪"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:210
+msgid "Load catalog"
+msgstr "加载清单"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:211
+msgid "Open target"
+msgstr "打开安装目录"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:213
+msgid "Open temp downloads"
+msgstr "打开临时下载目录"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:265
+msgid "A model operation is still running."
+msgstr "模型操作正在进行。"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:292
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:591
+msgid "Failed."
+msgstr "失败。"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:296
+#, python-brace-format
+msgid "Loading catalog: {url}"
+msgstr "正在加载清单：{url}"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:305
+#, python-brace-format
+msgid "Catalog: remote; generated {generatedAt}"
+msgstr "清单：远程；生成时间：{generatedAt}"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:311
+#, python-brace-format
+msgid "Remote catalog failed: {error}"
+msgstr "远程清单加载失败：{error}"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:315
+#, python-brace-format
+msgid "Catalog: bundled fallback; generated {generatedAt}"
+msgstr "清单：内置备用；生成时间：{generatedAt}"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:330
+msgid "Catalog: failed to load"
+msgstr "清单：加载失败"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:339
+#, python-brace-format
+msgid "Loaded {count} model package(s)."
+msgstr "已加载 {count} 个模型包。"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:346
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:389
+#: addon\globalPlugins\polyglot\modelManager\service.py:245
+msgid "Another model operation is already running."
+msgstr "已有模型操作正在进行。"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:367
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:368
+msgid "Changes applied."
+msgstr "更改已应用。"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:379
+#, python-brace-format
+msgid ""
+"This will delete {size:.1f} MiB of temporary and legacy cached downloads. "
+"Installed models will not be removed.\n"
+"\n"
+"Continue?"
+msgstr ""
+"这将删除 {size:.1f} MiB 的临时下载文件和旧版下载缓存。已安装的模型不会被移除。\n"
+"\n"
+"是否继续？"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:409
+msgid "Temporary downloads are empty."
+msgstr "没有临时下载文件。"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:411
+#: addon\globalPlugins\polyglot\modelManager\installer.py:121
+#, python-brace-format
+msgid "Cleared temporary downloads ({size:.1f} MiB)."
+msgstr "已清除临时下载文件（{size:.1f} MiB）。"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:433
+msgid "installed"
+msgstr "已安装"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:433
+msgid "not installed"
+msgstr "未安装"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:441
+#, python-brace-format
+msgid "{count} installed package(s) detected."
+msgstr "检测到 {count} 个已安装模型包。"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:459
+#, python-brace-format
+msgid "{size:.1f} MiB"
+msgstr "{size:.1f} MiB"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:483
+#, python-brace-format
+msgid ""
+"The following installed model package(s) will be removed:\n"
+"\n"
+"{names}\n"
+"\n"
+"Continue?"
+msgstr ""
+"将移除以下已安装的模型包：\n"
+"\n"
+"{names}\n"
+"\n"
+"是否继续？"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:503
+#, python-brace-format
+msgid ""
+"Selected: {selected} | Install: {install} | Remove: {remove} | Cleanup: "
+"{cleanup}"
+msgstr "已选：{selected} | 将安装：{install} | 将移除：{remove} | 清理：{cleanup}"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:560
+msgid "Hide advanced"
+msgstr "隐藏高级选项"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:565
+#, python-brace-format
+msgid "Status: {message}"
+msgstr "状态：{message}"
+
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:602
+#, python-brace-format
+msgid "Settings could not be saved: {error}"
+msgstr "无法保存设置：{error}"
+
+#: addon\globalPlugins\polyglot\modelManager\installer.py:141
+msgid "No model packages selected."
+msgstr "未选择任何模型包。"
+
+#: addon\globalPlugins\polyglot\modelManager\installer.py:145
+#, python-brace-format
+msgid "Unknown package key: {key}"
+msgstr "未知模型包标识：{key}"
+
+#: addon\globalPlugins\polyglot\modelManager\installer.py:175
+msgid "TranslateKit runtime already installed."
+msgstr "TranslateKit 运行时已安装。"
+
+#: addon\globalPlugins\polyglot\modelManager\installer.py:180
+msgid "TranslateKit runtime does not have a downloadable archive."
+msgstr "TranslateKit 运行时没有可下载的压缩包。"
+
+#: addon\globalPlugins\polyglot\modelManager\installer.py:181
+msgid "Installing downloaded TranslateKit runtime."
+msgstr "正在安装已下载的 TranslateKit 运行时。"
+
+#: addon\globalPlugins\polyglot\modelManager\installer.py:203
+#, python-brace-format
+msgid "{package} already installed."
+msgstr "{package} 已安装。"
+
+#: addon\globalPlugins\polyglot\modelManager\installer.py:210
+#, python-brace-format
+msgid "{package} does not have a downloadable archive."
+msgstr "{package} 没有可下载的压缩包。"
+
+#: addon\globalPlugins\polyglot\modelManager\installer.py:246
+#, python-brace-format
+msgid "Using cached archive {fileName}."
+msgstr "使用已缓存的压缩包 {fileName}。"
+
+#: addon\globalPlugins\polyglot\modelManager\installer.py:251
+#: addon\globalPlugins\polyglot\modelManager\installer.py:467
+#, python-brace-format
+msgid "Downloading {fileName}."
+msgstr "正在下载 {fileName}。"
+
+#: addon\globalPlugins\polyglot\modelManager\installer.py:255
+#, python-brace-format
+msgid "Downloaded archive verification failed: {fileName}"
+msgstr "下载的压缩包校验失败：{fileName}"
+
+#: addon\globalPlugins\polyglot\modelManager\installer.py:278
+#, python-brace-format
+msgid "Archive entry is outside the install root: {entry}"
+msgstr "压缩包条目位于安装目录之外：{entry}"
+
+#: addon\globalPlugins\polyglot\modelManager\installer.py:286
+#, python-brace-format
+msgid "Extracting {fileName}."
+msgstr "正在解压 {fileName}。"
+
+#: addon\globalPlugins\polyglot\modelManager\installer.py:294
+#, python-brace-format
+msgid "Removed {package}."
+msgstr "已移除 {package}。"
+
+#: addon\globalPlugins\polyglot\modelManager\installer.py:326
+#, python-brace-format
+msgid "Removed TranslateKit runtime ({size:.1f} MiB)."
+msgstr "已移除 TranslateKit 运行时（{size:.1f} MiB）。"
+
+#: addon\globalPlugins\polyglot\modelManager\installer.py:445
+#, python-brace-format
+msgid "Archive path has no file name: {path}"
+msgstr "压缩包路径没有文件名：{path}"
+
+#: addon\globalPlugins\polyglot\modelManager\installer.py:604
+#, python-brace-format
+msgid ""
+"Some model files are currently being used and cannot be replaced or "
+"removed.\n"
+"\n"
+"Please manually disable the {engine} translation engine, restart NVDA, and "
+"then try again.\n"
+"\n"
+"Error: {error}"
+msgstr ""
+"部分模型文件正在使用中，无法替换或移除。\n"
+"\n"
+"请先手动禁用 {engine} 翻译引擎，重启 NVDA 后再重试。\n"
+"\n"
+"错误：{error}"
+
+#: addon\globalPlugins\polyglot\modelManager\installer.py:607
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:33
+msgid "Chrome AI (Offline)"
+msgstr "Chrome AI（离线）"
+
+#: addon\globalPlugins\polyglot\modelManager\menu.py:75
+msgid "Polyglot ChromeAI model manager"
+msgstr "Polyglot ChromeAI 模型管理器"
+
+#: addon\globalPlugins\polyglot\modelManager\menu.py:76
+msgid "Manage Polyglot ChromeAI offline translation models"
+msgstr "管理 Polyglot ChromeAI 离线翻译模型"
+
+#: addon\globalPlugins\polyglot\modelManager\service.py:209
+#, python-brace-format
+msgid ""
+"The following offline model package(s) are not installed:\n"
+"\n"
+"{packages}\n"
+"\n"
+"Choose Yes to download and install them with Polyglot's model manager. Use "
+"this if Chrome's model download service is slow, blocked, or unreliable on "
+"your network.\n"
+"Choose No to let Chrome download them.\n"
+"Choose Cancel to cancel this translation."
+msgstr ""
+"以下离线模型包尚未安装：\n"
+"\n"
+"{packages}\n"
+"\n"
+"选择“是”：使用 Polyglot 模型管理器下载并安装。若你的网络访问 Chrome 模型下载服务较慢、被阻断或不稳定，建议选择此项。\n"
+"选择“否”：让 Chrome 下载模型。\n"
+"选择“取消”：取消本次翻译。"
+
+#: addon\globalPlugins\polyglot\modelManager\service.py:264
+msgid "Model installation complete."
+msgstr "模型安装完成。"
+
 #: addon\globalPlugins\polyglot\services\engine.py:58
 msgid "Enable this engine"
 msgstr "启用此引擎(&N)"
 
 #: addon\globalPlugins\polyglot\services\engine.py:242
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:111
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:127
 #: addon\globalPlugins\polyglot\views\interactiveDialog.py:46
 msgid "Source language:"
 msgstr "源语言："
 
 #: addon\globalPlugins\polyglot\services\engine.py:249
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:118
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:134
 #: addon\globalPlugins\polyglot\views\interactiveDialog.py:47
 msgid "Target language:"
 msgstr "目标语言："
@@ -808,13 +1174,13 @@ msgid "Request timeout:"
 msgstr "请求超时："
 
 #: addon\globalPlugins\polyglot\services\engine.py:286
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:126
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:142
 msgid ""
 "Auto-swap if detected source matches target (source must be 'Auto-detect')"
-msgstr "当检测到的源语言与目标语言相同时自动交换 (源语言须为“自动检测”)"
+msgstr "检测到的源语言与目标语言相同时自动交换（源语言必须为“自动检测”）"
 
 #: addon\globalPlugins\polyglot\services\engine.py:293
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:133
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:149
 msgid "Swap to language:"
 msgstr "交换至语言："
 
@@ -930,51 +1296,48 @@ msgstr "彩云的认证令牌未配置。"
 msgid "Invalid API response or no translation result included."
 msgstr "API 响应无效或未包含翻译结果。"
 
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:30
-msgid "Chrome AI (Offline)"
-msgstr "Chrome AI（离线）"
-
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:89
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:105
 msgid ""
 "Enable Chrome AI offline engine (requires Chrome 138+, resources released on "
 "NVDA exit)"
-msgstr "启用 Chrome AI 离线引擎（需要 Chrome 138+，NVDA 退出时会释放资源）"
+msgstr "启用 Chrome AI 离线引擎（需要 Chrome 138+；NVDA 退出时释放资源）"
 
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:187
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:230
 msgid ""
-"Chrome AI offline engine is disabled. Please enable it in the Polyglot "
-"settings panel to use."
-msgstr "Chrome AI 离线引擎已禁用。如需使用请先在 Polyglot 设置面板中启用。"
+"Chrome AI offline engine is disabled. Enable it in the Polyglot settings "
+"panel before using it."
+msgstr "Chrome AI 离线引擎已禁用。请先在 Polyglot 设置面板中启用后再使用。"
 
 #. Translators: {model} is a model name like "Translation model" or "Language detection model".
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:242
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:271
 #, python-brace-format
 msgid "Preparing {model}..."
-msgstr "正在准备{model}..."
+msgstr "正在准备 {model}..."
 
 #. Translators: Announced when Chrome has finished preparing an offline model.
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:254
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:283
 msgid "Model ready."
-msgstr "模型已就绪。"
+msgstr "模型已准备好。"
 
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:300
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:420
 msgid "Language detection model"
 msgstr "语言检测模型"
 
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:313
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:451
-msgid "Unexpected response from Chrome AI."
-msgstr "Chrome AI 意外响应"
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:435
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:449
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:609
+msgid "Chrome AI returned an unexpected response."
+msgstr "Chrome AI 返回了意外响应。"
 
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:385
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:532
 msgid "Translation model"
 msgstr "翻译模型"
 
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:390
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:538
 msgid "Unexpected Chrome AI error: "
 msgstr "Chrome AI 出现意外错误："
 
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:416
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:564
 msgid ""
 "Chrome's Translator API is not available. Please update Chrome to version "
 "138 or later and ensure the TranslationAPI flag is enabled in chrome://flags."
@@ -982,46 +1345,40 @@ msgstr ""
 "Chrome 的翻译 API 不可用。请将 Chrome 更新至 138 或更高版本，并确保在 "
 "chrome://flags 中启用 TranslationAPI。"
 
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:539
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:572
 msgid ""
 "Chrome's LanguageDetector API is not available. Please update Chrome and "
 "enable the TranslationAPI and LanguageDetectionAPI flags."
 msgstr ""
-"Chrome 的 LanguageDetector API 不可用。请更新 Chrome 并启用 TranslationAPI 和 LanguageDetectionAPI。"
+"Chrome 的 LanguageDetector API 不可用。请更新 Chrome 并启用 TranslationAPI "
+"和 LanguageDetectionAPI。"
 
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:547
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:580
 msgid ""
-"Chrome AI requires a secure page context. Please restart NVDA and try the "
+"Chrome AI must run in a secure page context. Please restart NVDA and try the "
 "Chrome AI engine again."
-msgstr "Chrome AI 需要安全页面上下文。请重启 NVDA，然后再次尝试 Chrome AI 引擎。"
+msgstr "Chrome AI 必须在安全页面环境中运行。请重启 NVDA 后重试 Chrome AI 引擎。"
 
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:430
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:586
 msgid "Language detection is not supported in this Chrome installation."
 msgstr "此版本的 Chrome 不支持语言检测。"
 
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:436
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:592
 #, python-brace-format
 msgid ""
-"Could not confidently detect the source language. Please select a source "
+"The source language could not be detected confidently. Select a source "
 "language instead of Auto-detect. (confidence: {confidence})"
-msgstr ""
-"无法可靠地识别源语言。请手动选择源语言，不要使用自动检测。（置信度："
-"{confidence}）"
+msgstr "无法可靠检测源语言。请选择具体源语言，不要使用自动检测。（置信度：{confidence}）"
 
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:442
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:598
 msgid "Language detection error: "
 msgstr "语言检测错误："
 
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:446
-#, python-brace-format
-msgid "Language pair {pair} is not supported by Chrome's offline models."
-msgstr "Chrome AI 离线模型不支持语言对 {pair}。"
-
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:449
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:607
 msgid "Chrome AI error: "
 msgstr "Chrome AI 错误："
 
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:449
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:607
 msgid "Unknown error"
 msgstr "未知错误"
 
@@ -1491,7 +1848,7 @@ msgid "Polyglot Interactive Translation"
 msgstr "Polyglot 交互式翻译"
 
 #: addon\globalPlugins\polyglot\views\interactiveDialog.py:40
-#: addon\globalPlugins\polyglot\views\settings.py:53
+#: addon\globalPlugins\polyglot\views\settings.py:54
 msgid "Translation &engine:"
 msgstr "翻译引擎(&E)："
 
@@ -1542,22 +1899,22 @@ msgstr "不适用"
 msgid "Translating..."
 msgstr "翻译中..."
 
-#: addon\globalPlugins\polyglot\views\settings.py:63
+#: addon\globalPlugins\polyglot\views\settings.py:64
 msgid "Common Settings"
 msgstr "通用设置"
 
-#: addon\globalPlugins\polyglot\views\settings.py:68
+#: addon\globalPlugins\polyglot\views\settings.py:69
 msgid "Copy manual translation results to clipboard"
 msgstr "将手动翻译结果复制到剪贴板"
 
-#: addon\globalPlugins\polyglot\views\settings.py:74
+#: addon\globalPlugins\polyglot\views\settings.py:75
 msgid ""
 "Enable smart speech filter (skips non-translatable text like roles, states, "
 "location and other formatting information)"
 msgstr ""
 "启用智能语音过滤（忽略无需翻译的文本，例如角色、状态、位置和其他格式信息）"
 
-#: addon\globalPlugins\polyglot\views\settings.py:78
+#: addon\globalPlugins\polyglot\views\settings.py:79
 msgid "Clear Cache"
 msgstr "清除缓存"
 
@@ -1565,7 +1922,7 @@ msgstr "清除缓存"
 msgid "This engine requires no additional configuration."
 msgstr "此引擎无需额外配置。"
 
-#: addon\globalPlugins\polyglot\views\settings.py:295
+#: addon\globalPlugins\polyglot\views\settings.py:290
 #, python-brace-format
 msgid "Clear Cache (Items: {})"
 msgstr "清除缓存 (条目数：{})"
@@ -1573,40 +1930,17 @@ msgstr "清除缓存 (条目数：{})"
 #. Add-on description
 #. Translators: Long description to be shown for this add-on on add-on information from add-on store
 #: buildVars.py:26
-msgid "This is A translation add-on. Supports multiple engines."
-msgstr "这是一个翻译插件，支持多种引擎。"
+msgid "A translation add-on for NVDA with support for multiple engines."
+msgstr "支持多种引擎的 NVDA 翻译插件。"
 
 #. Brief changelog for this version
 #. Translators: what's new content for the add-on version to be shown in the add-on store
 #: buildVars.py:31
 msgid ""
-"### 0.8.6\n"
+"### 0.8.7\n"
 "\n"
-"- Trim bundled websocket client files.\n"
 "- ChromeAI stability improvements."
 msgstr ""
-"### 0.8.6\n"
+"### 0.8.7\n"
 "\n"
-"- 精简捆绑的 websocket 客户端文件。\n"
 "- 改进 ChromeAI 稳定性。"
-
-#~ msgid ""
-#~ "### 0.8.1\n"
-#~ "\n"
-#~ "Bump version."
-#~ msgstr ""
-#~ "### 0.8.1\n"
-#~ "\n"
-#~ "更新版本。"
-
-#~ msgid "First version."
-#~ msgstr "初版发布。"
-
-#~ msgid "The current engine has no swappable languages."
-#~ msgstr "当前引擎无可交换的语言。"
-
-#~ msgid "Use HTTPS connection"
-#~ msgstr "使用 HTTPS 连接"
-
-#~ msgid "Tencent Translate (Web, key-free)"
-#~ msgstr "腾讯翻译 (网页版，免密钥)"
