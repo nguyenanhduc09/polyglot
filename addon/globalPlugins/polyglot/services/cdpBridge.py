@@ -53,6 +53,7 @@ class CdpBridge:
 	_nextMsgId = 0
 	_msgIdLock = threading.Lock()
 	_debugPort: int | None = None
+	_staleDebugPort: int | None = None
 	_targetId: str | None = None
 	_ownsBrowser = False
 
@@ -110,8 +111,7 @@ class CdpBridge:
 			raise CdpError("Chrome not found. Please install Google Chrome.")
 		os.makedirs(USER_DATA_DIR, exist_ok=True)
 		pageUrl = self._preparePageUrl()
-		if self._reuseExistingBrowser():
-			return
+		self._staleDebugPort = self._readDevToolsActivePort()
 		try:
 			os.remove(DEVTOOLS_ACTIVE_PORT_FILE)
 		except FileNotFoundError:
@@ -153,6 +153,14 @@ class CdpBridge:
 			return None
 		return None
 
+	def _writeDevToolsActivePort(self, port: int) -> None:
+		"""Restore the DevToolsActivePort file for a reused Chrome endpoint."""
+		try:
+			with open(DEVTOOLS_ACTIVE_PORT_FILE, "w", encoding="utf-8") as portFile:
+				portFile.write(f"{port}\n")
+		except OSError:
+			log.warning("Could not restore Chrome DevToolsActivePort file.", exc_info=True)
+
 	def _readJsonFromPort(self, port: int, path: str, method: str = "GET", timeout: float = 1) -> Any:
 		"""Reads a JSON response from a Chrome debugging HTTP endpoint on a specific port."""
 		url = f"http://127.0.0.1:{port}{path}"
@@ -160,23 +168,29 @@ class CdpBridge:
 		with urllib.request.urlopen(req, timeout=timeout) as response:
 			return json.loads(response.read().decode("utf-8"))
 
-	def _reuseExistingBrowser(self) -> bool:
-		"""Reuses an already-running managed Chrome debugging endpoint when it is still live."""
-		port = self._readDevToolsActivePort()
-		if port is None:
-			return False
-		for _ in range(10):
+	def _reuseBrowserAtPort(
+		self,
+		port: int,
+		attempts: int = 10,
+		timeout: float = 0.5,
+		retryDelay: float = 0.2,
+	) -> bool:
+		"""Reuse an already-running managed Chrome debugging endpoint at a known port."""
+		for attempt in range(attempts):
 			try:
-				versionInfo = self._readJsonFromPort(port, "/json/version", timeout=0.5)
+				versionInfo = self._readJsonFromPort(port, "/json/version", timeout=timeout)
 				if not isinstance(versionInfo, dict):
+					if attempt + 1 < attempts and retryDelay:
+						time.sleep(retryDelay)
 					continue
 				self._debugPort = port
 				self._ownsBrowser = False
 				log.info(f"Reusing existing Chrome CDP endpoint on port {port}.")
 				return True
 			except Exception:
-				time.sleep(0.2)
-		log.warning("Ignoring stale Chrome DevToolsActivePort; CDP endpoint was not reachable.")
+				if attempt + 1 < attempts and retryDelay:
+					time.sleep(retryDelay)
+		log.warning(f"Could not reuse stale Chrome CDP endpoint on port {port}.")
 		return False
 
 	def _preparePageUrl(self) -> str:
@@ -196,13 +210,21 @@ class CdpBridge:
 				self._chromeProcess = None
 				self._ownsBrowser = False
 				if exitCode == 21:
-					if self._reuseExistingBrowser() and self._debugPort is not None:
+					staleDebugPort = self._staleDebugPort
+					self._staleDebugPort = None
+					if (
+						staleDebugPort is not None
+						and self._reuseBrowserAtPort(staleDebugPort)
+						and self._debugPort is not None
+					):
+						self._writeDevToolsActivePort(staleDebugPort)
 						return self._debugPort
 					raise CdpError("Chrome AI profile is already in use by another Chrome process.")
 				raise CdpError(f"Chrome exited before CDP became available: {exitCode}")
 			port = self._readDevToolsActivePort()
 			if port is not None:
 				self._debugPort = port
+				self._staleDebugPort = None
 				return self._debugPort
 			time.sleep(0.25)
 		raise CdpError("Timeout waiting for Chrome DevToolsActivePort.")
@@ -480,5 +502,6 @@ class CdpBridge:
 					pass
 			self._chromeProcess = None
 			self._debugPort = None
+			self._staleDebugPort = None
 			self._targetId = None
 			self._ownsBrowser = False
